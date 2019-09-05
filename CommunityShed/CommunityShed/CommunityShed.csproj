@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Community\CommunityAdd.aspx" />
+    <Content Include="Community\CommunityJoin.aspx" />
     <Content Include="packages.config" />
     <Content Include="CommunityShed.Master" />
     <None Include="Web.Debug.config">
@@ -101,6 +102,13 @@
     </Compile>
     <Compile Include="Community\CommunityAdd.aspx.designer.cs">
       <DependentUpon>CommunityAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Community\CommunityJoin.aspx.cs">
+      <DependentUpon>CommunityJoin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Community\CommunityJoin.aspx.designer.cs">
+      <DependentUpon>CommunityJoin.aspx</DependentUpon>
     </Compile>
     <Compile Include="Data\DatabaseHelper.cs" />
     <Compile Include="Data\Hashing.cs" />
