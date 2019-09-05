@@ -15,6 +15,9 @@
 <body>
     <form id="form1" runat="server">
     <div>
+        <header>
+            <asp:Button ID="LogoutButton" Text="Logout" runat="server" onclick="LogoutButton_Click"/>
+        </header>
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
         
         </asp:ContentPlaceHolder>

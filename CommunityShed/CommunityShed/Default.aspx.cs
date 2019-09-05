@@ -16,14 +16,17 @@ namespace CommunityShed
         {
             if(!IsPostBack)
             {
+                string email = User.Identity.Name;
                 DataTable dt = DatabaseHelper.Retrieve(@"
                     select pC.CommunityId, c.CommunityName,
                     c.[Open]
                     from PersonCommunity pC
                         join Community c
                         on c.Id = pC.CommunityId
-                        where pC.PersonId = @PersonId
-                ", new SqlParameter("@PersonId", 1));
+                        join Person 
+                        on pC.PersonId = Person.Id
+                        where Person.Email = @Email
+                ", new SqlParameter("@Email", email));
 
                 Communities.DataSource = dt.Rows;
                 Communities.DataBind();
