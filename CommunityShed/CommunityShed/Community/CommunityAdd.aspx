@@ -3,14 +3,15 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <fieldset>
-        <div>
+        <div class="form-group">
             <asp:label ID="CommunityNameLabel" runat="server" Text="Community Name: " />
-            <asp:textbox ID="CommunityName" runat="server" />
+            <asp:textbox class="form-control" ID="CommunityName" runat="server" placeholder="Community Name" />
         </div>
 
-        <div>
+        <div class="form-group">
             <asp:Label ID="OpenLabel" runat="server" Text="Community Privacy: " />
             <asp:DropDownList ID="OpenList"
+                class="form-control"
                 AutoPostBack="true"
                 runat="server" >
                 <asp:ListItem Selected="True" Value="Open">Open</asp:ListItem>
@@ -19,7 +20,7 @@
         </div>
 
         <div>
-            <asp:Button ID="Submit" text="Submit" OnClick="Submit_Click" runat="server" />
+            <asp:Button ID="Submit" text="Submit" class="btn btn-outline-secondary" OnClick="Submit_Click" runat="server" />
         </div>
     </fieldset>
 </asp:Content>
