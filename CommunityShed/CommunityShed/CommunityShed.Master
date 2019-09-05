@@ -17,7 +17,10 @@
         <div>
             <header>
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <a class="navbar-brand" href="#">Community Shed</a>
+                    <a class="navbar-brand" href="#">
+                        <asp:Label ID="WelcomeMessage" runat="server"></asp:Label>
+
+                    </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -30,11 +33,19 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Link</a>
                             </li>
-                           
   
                         </ul>
                         
-                        <asp:Button ID="LogoutButton" CssClass="btn btn-light" Text="Logout" runat="server" OnClick="LogoutButton_Click" />
+                        <asp:LoginView runat="server">
+                            <LoggedInTemplate>
+                                
+                                <asp:Button ID="LogoutButton" CssClass="btn btn-light" Text="Logout" runat="server" OnClick="LogoutButton_Click" />
+                            </LoggedInTemplate>
+                            <AnonymousTemplate>
+                                 <a class="btn btn-secondary" href="SignUp.aspx" >Sign Up</a>
+                            </AnonymousTemplate>
+                        </asp:LoginView>
+                        
                     </div>
                 </nav>
                 
