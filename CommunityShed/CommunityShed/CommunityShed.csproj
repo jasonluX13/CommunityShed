@@ -89,6 +89,7 @@
     <Compile Include="CommunityShed.Master.designer.cs">
       <DependentUpon>CommunityShed.Master</DependentUpon>
     </Compile>
+    <Compile Include="Data\DatabaseHelper.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
