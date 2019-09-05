@@ -36,7 +36,7 @@ namespace CommunityShed.Community
 
             int ownerId = dt.Rows[0].Field<int>("Id");
 
-            DatabaseHelper.Insert(@"
+            int? communityId = DatabaseHelper.Insert(@"
                 insert into Community (CommunityName, [Open], OwnerId)
                 values (@CommunityName, @Open, @OwnerId);
             ",
@@ -44,6 +44,12 @@ namespace CommunityShed.Community
                 new SqlParameter("@Open", privacy),
                 new SqlParameter("@OwnerId", ownerId));
 
+            DatabaseHelper.Insert(@"
+                insert into PersonCommunity (PersonId, CommunityId)
+                values (@PersonId, @CommunityId);
+            ",
+                new SqlParameter("@PersonId", ownerId),
+                new SqlParameter("@CommunityId",communityId));
             Response.Redirect("~/Default.aspx");
         }
     }
