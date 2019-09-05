@@ -42,6 +42,7 @@
                                 <asp:Button ID="LogoutButton" CssClass="btn btn-light" Text="Logout" runat="server" OnClick="LogoutButton_Click" />
                             </LoggedInTemplate>
                             <AnonymousTemplate>
+                                <a class="btn btn-primary" href="Login.aspx" >Login</a>
                                  <a class="btn btn-secondary" href="SignUp.aspx" >Sign Up</a>
                             </AnonymousTemplate>
                         </asp:LoginView>

@@ -5,7 +5,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="col-3">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+        <asp:textbox id="SearchText" runat="server" CssClass="form-control mr-sm-2" placeholder="Search" aria-label="Search" />
         <asp:button id="Search" runat="server" cssclass="btn btn-outline-success my-2 my-sm-0" text="Search" OnClick="Search_Click"></asp:button>
     </div>
 
