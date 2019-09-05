@@ -70,6 +70,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Community\CommunityAdd.aspx" />
     <Content Include="packages.config" />
     <Content Include="CommunityShed.Master" />
     <None Include="Web.Debug.config">
@@ -92,6 +93,13 @@
     </Compile>
     <Compile Include="CommunityShed.Master.designer.cs">
       <DependentUpon>CommunityShed.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Community\CommunityAdd.aspx.cs">
+      <DependentUpon>CommunityAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Community\CommunityAdd.aspx.designer.cs">
+      <DependentUpon>CommunityAdd.aspx</DependentUpon>
     </Compile>
     <Compile Include="Data\DatabaseHelper.cs" />
     <Compile Include="Data\Hashing.cs" />
@@ -129,7 +137,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>58827</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

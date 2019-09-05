@@ -8,7 +8,7 @@
     <div>
         <asp:Repeater ID="Communities" runat="server" ItemType="DataRow">
             <HeaderTemplate>
-                <table class="table">
+                <table class="table table-striped tabled-bordered table-hover">
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">Community Name</th>
@@ -19,7 +19,7 @@
             <ItemTemplate>
                 <tr>
                     <td><%# Item.Field<string>("CommunityName") %></td>
-                    <td><asp:hyperlink runat="server" navigateurl='<%# $"~/CommunityDetails.aspx?ID={Item.Field<int>("ID")}" %>' text="Details" /></td>
+                    <td><asp:hyperlink runat="server" class="btn btn-sl btn-outline-info" navigateurl='<%# $"~/CommunityDetails.aspx?ID={Item.Field<int>("Id")}" %>' text="Details" /></td>
                 </tr>
             </ItemTemplate>
             <FooterTemplate>
@@ -27,4 +27,9 @@
             </FooterTemplate>
         </asp:Repeater>
     </div>
+
+    <div>
+        <asp:hyperlink runat="server" class="btn btn-lg btn-info" navigateurl="~/Community/CommunityAdd.aspx">Create New Community</asp:hyperlink>
+    </div>
+
 </asp:Content>

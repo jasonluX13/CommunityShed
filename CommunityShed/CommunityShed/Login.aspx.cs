@@ -29,11 +29,13 @@ namespace CommunityShed
                 Person
                 Where Email = @Email
             ", new SqlParameter("@Email", email));
+
             if (dt.Rows.Count == 0)
             {
                 ErrorMessage.Visible = true;
                 return;
             }
+
             string correctHash = dt.Rows[0].Field<string>("Password");
             if (Hashing.ValidatePassword(password, correctHash))
             {
