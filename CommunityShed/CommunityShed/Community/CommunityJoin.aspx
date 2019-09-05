@@ -1,12 +1,15 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CommunityShed.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="CommunityShed.Default" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CommunityShed.Master" AutoEventWireup="true" CodeBehind="CommunityJoin.aspx.cs" Inherits="CommunityShed.Community.CommunityJoin" %>
 <%@ import namespace="System.Data" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h1 class="display-3 text-center">Your Community Sheds</h1>
-    <div>
-        <asp:Repeater ID="Communities" runat="server" ItemType="DataRow">
+    <div class="col-3">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+        <asp:button id="Search" runat="server" cssclass="btn btn-outline-success my-2 my-sm-0" text="Search" OnClick="Search_Click"></asp:button>
+    </div>
+
+    <asp:Repeater ID="Communities" runat="server" ItemType="DataRow">
             <HeaderTemplate>
                 <table class="table table-striped tabled-bordered table-hover">
                     <thead class="thead-dark">
@@ -26,14 +29,5 @@
                 </table>
             </FooterTemplate>
         </asp:Repeater>
-    </div>
-
-    <div>
-        <asp:hyperlink runat="server" class="btn btn-lg btn-info" navigateurl="~/Community/CommunityAdd.aspx">Create New Community</asp:hyperlink>
-    </div>
-    <br /><br />
-    <div>
-        <asp:hyperlink runat="server" class="btn btn-lg btn-info" navigateurl="~/Community/CommunityJoin.aspx">Join a New Community</asp:hyperlink>
-    </div>
 
 </asp:Content>
