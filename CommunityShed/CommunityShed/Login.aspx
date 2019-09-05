@@ -11,8 +11,9 @@
             <asp:TextBox ID="Password" runat="server" placeholder="Password" TextMode="Password"></asp:TextBox>
         </div>
         <div>
-            <asp:Button ID="LoginButton" Text="Login" runat="server" OnClick="LoginButton_Click" />
+            <asp:Button ID="LoginButton" Text="Login" cssclass="btn btn-primary" runat="server" OnClick="LoginButton_Click" />
         </div>
         <asp:Label ID="ErrorMessage" runat="server" Visible="false" ForeColor="Red">Error, either username or password is incorrect</asp:Label>
     </fieldset>
+    <a class="btn btn-secondary" href="SignUp.aspx" >Sign Up</a>
 </asp:Content>
