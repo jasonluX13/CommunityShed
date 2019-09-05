@@ -4,21 +4,22 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h1>Welcome to your Community Sheds</h1>
+    <h1 class="display-3 text-center">Your Community Sheds</h1>
     <div>
         <asp:Repeater ID="Communities" runat="server" ItemType="DataRow">
             <HeaderTemplate>
-                <table>
-                    <tr>
-                        <th>Community Name</th>
-                        <th>Community Status</th>
-                        <th>&nbsp;</th>
-                    </tr>
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Community Name</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
             </HeaderTemplate>
             <ItemTemplate>
                 <tr>
                     <td><%# Item.Field<string>("CommunityName") %></td>
-                    <td><%# Item.Field<bool>("Open") %></td>
+                    <td><asp:hyperlink runat="server" navigateurl='<%# $"~/CommunityDetails.aspx?ID={Item.Field<int>("ID")}" %>' text="Details" /></td>
                 </tr>
             </ItemTemplate>
             <FooterTemplate>

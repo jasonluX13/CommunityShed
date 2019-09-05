@@ -18,8 +18,7 @@ namespace CommunityShed
             {
                 string email = User.Identity.Name;
                 DataTable dt = DatabaseHelper.Retrieve(@"
-                    select pC.CommunityId, c.CommunityName,
-                    c.[Open]
+                    select pC.CommunityId, c.CommunityName, pC.Id
                     from PersonCommunity pC
                         join Community c
                         on c.Id = pC.CommunityId
