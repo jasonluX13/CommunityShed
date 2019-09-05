@@ -27,13 +27,8 @@
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
-<<<<<<< HEAD
-                            <li class="nav-item active">
-                                <a class="nav-link" href="~/Default.aspx">Home <span class="sr-only">(current)</span></a>
-=======
                             <li class="nav-item">
                                 <asp:hyperlink runat="server" CssClass="nav-link" navigateUrl="~/Default.aspx">Home </asp:hyperlink>
->>>>>>> a48c95a43360f5a3de1a4f9237da014bb71c1ea5
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Link</a>
