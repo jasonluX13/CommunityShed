@@ -16,17 +16,36 @@ namespace CommunityShed.Community
         {
             if (!IsPostBack)
             {
-                string email = User.Identity.Name;
-                DataTable dt = DatabaseHelper.Retrieve(@"
+                ViewAll();
+
+            }
+        }
+
+        protected void ViewAll()
+        {
+
+            DataTable dt = DatabaseHelper.Retrieve(@"
                     select c.Id, CommunityName, p.FirstName + ' '+ p.LastName as OwnerName
                     from Community c join Person p on 
                     c.OwnerId = p.Id
                 ");
 
-                Communities.DataSource = dt.Rows;
-                Communities.DataBind();
+            Communities.DataSource = dt.Rows;
+            Communities.DataBind();
+        }
 
-            }
+        protected void Search_Click(object sender, EventArgs e)
+        {
+            string search = SearchText.Text;
+            DataTable dt = DatabaseHelper.Retrieve(@"
+                    select c.Id, CommunityName, p.FirstName + ' '+ p.LastName as OwnerName
+                    from Community c join Person p on 
+                    c.OwnerId = p.Id
+                    where CommunityName Like '%' + @Search + '%'
+                ",new SqlParameter("@Search", search));
+
+            Communities.DataSource = dt.Rows;
+            Communities.DataBind();
         }
     }
 }

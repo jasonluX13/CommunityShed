@@ -21,5 +21,5 @@
         </div>
         <asp:Label ID="ErrorMessage" runat="server" Visible="false" ForeColor="Red">Error, email already exists</asp:Label>
     </fieldset>
-    <a class="btn btn-secondary" href="Login.aspx" >Login</a>
+
 </asp:Content>

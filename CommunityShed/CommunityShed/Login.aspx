@@ -15,5 +15,5 @@
         </div>
         <asp:Label ID="ErrorMessage" runat="server" Visible="false" ForeColor="Red">Error, either username or password is incorrect</asp:Label>
     </fieldset>
-    <a class="btn btn-secondary" href="SignUp.aspx" >Sign Up</a>
+    
 </asp:Content>
