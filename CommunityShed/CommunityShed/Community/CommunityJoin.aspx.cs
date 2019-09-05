@@ -25,7 +25,7 @@ namespace CommunityShed.Community
         {
 
             DataTable dt = DatabaseHelper.Retrieve(@"
-                    select c.Id, CommunityName, p.FirstName + ' '+ p.LastName as OwnerName
+                    select c.Id, CommunityName, [Open], p.FirstName + ' '+ p.LastName as OwnerName
                     from Community c join Person p on 
                     c.OwnerId = p.Id
                 ");
@@ -38,7 +38,7 @@ namespace CommunityShed.Community
         {
             string search = SearchText.Text;
             DataTable dt = DatabaseHelper.Retrieve(@"
-                    select c.Id, CommunityName, p.FirstName + ' '+ p.LastName as OwnerName
+                    select c.Id, CommunityName, [Open], p.FirstName + ' '+ p.LastName as OwnerName
                     from Community c join Person p on 
                     c.OwnerId = p.Id
                     where CommunityName Like '%' + @Search + '%'

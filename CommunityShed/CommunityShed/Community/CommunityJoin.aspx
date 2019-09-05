@@ -15,6 +15,9 @@
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">Community Name</th>
+                            <th>Owner</th>
+                            <th>Open</th>
+                            <th>&nbsp;</th>
                             <th>&nbsp;</th>
                         </tr>
                     </thead>
@@ -22,7 +25,10 @@
             <ItemTemplate>
                 <tr>
                     <td><%# Item.Field<string>("CommunityName") %></td>
-                    <td><asp:hyperlink runat="server" class="btn btn-sl btn-outline-info" navigateurl='<%# $"~/CommunityDetails.aspx?ID={Item.Field<int>("Id")}" %>' text="Details" /></td>
+                    <td><%# Item.Field<string>("OwnerName") %></td>
+                    <td><%# Item.Field<bool>("Open") %></td>
+                    <td><asp:hyperlink runat="server" class="btn btn-sl btn-outline-info" navigateurl='<%# $"~/Community/CommunityDetails.aspx?ID={Item.Field<int>("Id")}" %>' text="Details" /></td>
+                    <td><asp:hyperlink runat="server" class="btn btn-sl btn-outline-info" navigateurl='<%# $"~/Community/Join.aspx?ID={Item.Field<int>("Id")}" %>' text="Join" /></td>
                 </tr>
             </ItemTemplate>
             <FooterTemplate>
