@@ -14,7 +14,7 @@ namespace CommunityShed.Roles
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            ListRoles();
         }
 
         protected void ListRoles()
@@ -27,7 +27,7 @@ namespace CommunityShed.Roles
                    where Person.Email = @Email     
             ", new SqlParameter("@Email", email));
 
-            Roles.DataSource = dt;
+            Roles.DataSource = dt.Rows;
             Roles.DataBind();
         }
     }
