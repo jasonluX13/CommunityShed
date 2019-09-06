@@ -58,7 +58,7 @@ namespace CommunityShed.Community
                 }
 
                 DataTable itemDT = DatabaseHelper.Retrieve(@"
-                    select i.Id,i.ItemName, i.Usage, i.Warning, i.Age,
+                    select i.ItemName, i.Usage, i.Warning, i.Age, i.Id,
                     p.FirstName + ' ' + p.LastName as OwnerName 
                     from CommunityItems cI
                     inner join Item i
@@ -95,7 +95,38 @@ namespace CommunityShed.Community
 
         protected void Borrow_Click(object sender, EventArgs e)
         {
+            var button = (Button)sender;
+            int itemId = int.Parse(button.CommandArgument);
 
+            DateTimeOffset requesteddate = DateTime.Now;
+
+            string email = User.Identity.Name;
+
+            DataTable person = DatabaseHelper.Retrieve(@"
+                    select Id
+                    from Person
+                    where Email = @Email
+                ", new SqlParameter("@Email", email));
+
+            DataTable community = DatabaseHelper.Retrieve(@"
+                    select Id
+                    from CommunityItems
+                    where ItemId = @ItemId
+                ", new SqlParameter("@ItemId", itemId));
+
+            int borrowerId = person.Rows[0].Field<int>("Id");
+            int communityitemId = community.Rows[0].Field<int>("Id");
+
+            DatabaseHelper.Insert(@"
+                insert into itemapplication (communityitemid, borrowerid, daterequested)
+                values (@communityitemid, @borrowerid, @daterequested);
+            ",
+                new SqlParameter("@communityitemid", communityitemId),
+                new SqlParameter("@borrowerid", borrowerId),
+                new SqlParameter("@daterequested", requesteddate));
+
+            button.Text = "Requested";
+            button.Enabled = false;
         }
     }
 }
