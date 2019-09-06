@@ -13,6 +13,7 @@
                         <tr>
                             <th scope="col">Community Name</th>
                             <th>&nbsp;</th>
+                            <th>&nbsp;</th>
                         </tr>
                     </thead>
             </HeaderTemplate>
@@ -20,6 +21,7 @@
                 <tr>
                     <td><%# Item.Field<string>("CommunityName") %></td>
                     <td><asp:hyperlink runat="server" class="btn btn-sl btn-outline-info" navigateurl='<%# $"~/Community/CommunityDetails.aspx?ID={Item.Field<int>("CommunityId")}" %>' text="Details" /></td>
+                    <td><asp:hyperlink runat="server" class="btn btn-sl btn-outline-info" navigateurl='<%# $"~/Community/CommunityMembers.aspx?ID={Item.Field<int>("CommunityId")}" %>' text="Members" /></td>
                 </tr>
             </ItemTemplate>
             <FooterTemplate>
