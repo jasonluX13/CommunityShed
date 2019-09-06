@@ -50,6 +50,31 @@ namespace CommunityShed.Community
             ",
                 new SqlParameter("@PersonId", ownerId),
                 new SqlParameter("@CommunityId",communityId));
+
+            DatabaseHelper.Insert(@"
+                Insert into PersonRole (CommunityId, PersonId, RoleId)
+                values (@CommunityId, @PersonId, 1)
+            ", new SqlParameter("@PersonId", ownerId),
+               new SqlParameter("@CommunityId", communityId));
+
+            DatabaseHelper.Insert(@"
+                Insert into PersonRole (CommunityId, PersonId, RoleId)
+                values (@CommunityId, @PersonId, 2)
+            ", new SqlParameter("@PersonId", ownerId),
+               new SqlParameter("@CommunityId", communityId));
+
+            DatabaseHelper.Insert(@"
+                Insert into PersonRole (CommunityId, PersonId, RoleId)
+                values (@CommunityId, @PersonId, 3)
+            ", new SqlParameter("@PersonId", ownerId),
+               new SqlParameter("@CommunityId", communityId));
+
+            DatabaseHelper.Insert(@"
+                Insert into PersonRole (CommunityId, PersonId, RoleId)
+                values (@CommunityId, @PersonId, 4)
+            ", new SqlParameter("@PersonId", ownerId),
+               new SqlParameter("@CommunityId", communityId));
+
             Response.Redirect("~/Default.aspx");
         }
     }

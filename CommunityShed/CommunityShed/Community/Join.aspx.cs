@@ -56,6 +56,13 @@ namespace CommunityShed.Community
                 values (@CommunityId, @PersonId)
             ", new SqlParameter("@PersonId", personId),
                new SqlParameter("@CommunityId", CommunityId));
+
+                DatabaseHelper.Insert(@"
+                Insert into PersonRole (CommunityId, PersonId, RoleId)
+                values (@CommunityId, @PersonId, 1)
+            ", new SqlParameter("@PersonId", personId),
+               new SqlParameter("@CommunityId", CommunityId));
+
                 Response.Redirect("~/Default.aspx");
             }
             else

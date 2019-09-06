@@ -43,6 +43,7 @@ namespace CommunityShed
             new SqlParameter("@LastName", lastName),
             new SqlParameter("@Email", email),
             new SqlParameter("@Password", hashedPassword));
+
             Response.Redirect("~/Login.aspx");
         }
     }
