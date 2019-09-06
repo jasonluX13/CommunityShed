@@ -79,6 +79,10 @@ namespace CommunityShed.Data
         {
             foreach (var r in roles)
             {
+                if (r == null)
+                {
+                    return false;
+                }
                 if (r.RoleName == role && r.CommunityId == communityId)
                 {
                     return true;
