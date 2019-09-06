@@ -47,6 +47,9 @@ namespace CommunityShed.Community
                     if (privacy)
                     {
                         OpenLabel.Text = "Open";
+                    } else
+                    {
+                        OpenLabel.Text = "Closed";
                     }
                 }
                 else
