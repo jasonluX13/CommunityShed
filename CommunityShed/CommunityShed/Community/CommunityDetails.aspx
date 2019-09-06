@@ -57,7 +57,7 @@
                         <td><%# Item.Field<string>("Usage") %></td>
                         <td><%# Item.Field<string>("Warning") %></td>
                         <td><%# Item.Field<string>("Age") %></td>
-                        <td><asp:Button ID="Borrow" Text="Request to Borrow" OnClick="Borrow_Click" runat="server" /></td>
+                        <td><asp:Button ID="Borrow" Text="Request to Borrow" CommandArgument='<%#Item.Field<int>("ID") %>' OnClick="Borrow_Click" runat="server" /></td>
                         <td></td>
                     </tr>
                 </ItemTemplate>
