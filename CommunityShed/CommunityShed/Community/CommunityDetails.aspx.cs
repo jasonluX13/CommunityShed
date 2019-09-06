@@ -12,7 +12,7 @@ namespace CommunityShed.Community
 {
     public partial class CommunityDetails : System.Web.UI.Page
     {
-        int communityId = 0;
+        public int communityId = 0;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -70,6 +70,8 @@ namespace CommunityShed.Community
 
                 Items.DataSource = itemDT.Rows;
                 Items.DataBind();
+
+                AddItem.NavigateUrl = $"~/Item/ItemAdd.aspx?ID={communityId}";
             }
         }
 
@@ -77,14 +79,15 @@ namespace CommunityShed.Community
         {
             string search = SearchText.Text;
             DataTable dt = DatabaseHelper.Retrieve(@"
-                select i.ItemName, i.Usage, i.Warning, i.Age,
+                select i.Id,i.ItemName, i.Usage, i.Warning, i.Age, cI.CommunityId,
                 p.FirstName + ' ' + p.LastName as OwnerName 
                 from CommunityItems cI
                 inner join Item i
                     on i.Id = cI.ItemId
                 inner join Person p
                     on i.OwnerId = p.Id
-                where ItemName Like '%' + @Search + '%' and cI.CommunityId = @Id
+                where ItemName Like '%' + @Search + '%' or Usage Like '%' + @Search + '%' or 
+                Age Like '%' + @Search + '%'  and cI.CommunityId = @Id
             ", 
                 new SqlParameter("@Search", search),
                 new SqlParameter("Id", communityId));
@@ -128,5 +131,6 @@ namespace CommunityShed.Community
             button.Text = "Requested";
             button.Enabled = false;
         }
+
     }
 }
