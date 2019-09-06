@@ -47,6 +47,7 @@
                                 <th>Age</th>
                                 <th>&nbsp;</th>
                                 <th>&nbsp;</th>
+                                <th>&nbsp;</th>
                             </tr>
                         </thead>
                 </HeaderTemplate>
@@ -57,7 +58,11 @@
                         <td><%# Item.Field<string>("Usage") %></td>
                         <td><%# Item.Field<string>("Warning") %></td>
                         <td><%# Item.Field<string>("Age") %></td>
+
                         <td><asp:Button ID="Borrow" Text="Request to Borrow" CommandArgument='<%#Item.Field<int>("Id") %>' OnClick="Borrow_Click" runat="server" /></td>
+
+                        <td><asp:hyperlink Text="Edit" CssClass="btn btn-dark" NavigateUrl='<%# $"~/Item/ItemEdit.aspx?ID={Item.Field<int>("Id")}" %>' runat="server" /></td>
+
                         <td></td>
                     </tr>
                 </ItemTemplate>
