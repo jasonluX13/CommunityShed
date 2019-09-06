@@ -31,7 +31,7 @@
                                 <asp:hyperlink runat="server" CssClass="nav-link" navigateUrl="~/Default.aspx">Home </asp:hyperlink>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Link</a>
+                                <asp:hyperlink runat="server" CssClass="nav-link" navigateUrl="~/Roles/MyRoles.aspx">My Roles </asp:hyperlink>
                             </li>
                         </ul>
                         
