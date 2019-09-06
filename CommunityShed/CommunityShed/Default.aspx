@@ -64,5 +64,36 @@
                     </table>
                 </FooterTemplate>
             </asp:Repeater>
-    </div>
+        </div>
+
+    <h2>Requests</h2>
+    <div>
+            <asp:Repeater ID="Requests" runat="server" ItemType="DataRow">
+                <HeaderTemplate>
+                    <table class="table table-striped tabled-bordered table-hover">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Item Name</th>
+                                <th>Requested User</th>
+                                <th>Community</th>
+                                <th>Date Requested</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                </HeaderTemplate>
+                <ItemTemplate>
+                    <tr>
+                        <td><%# Item.Field<string>("ItemName") %></td>
+                        <td><%# Item.Field<string>("BorrowerName") %></td>
+                        <td><%# Item.Field<string>("CommunityName") %></td>
+                        <td><%# Item.Field<DateTimeOffset>("DateRequested") %></td>
+                        <td></td>
+                    </tr>
+                </ItemTemplate>
+                <FooterTemplate>
+                    </table>
+                </FooterTemplate>
+            </asp:Repeater>
+        </div>
+
 </asp:Content>

@@ -58,7 +58,7 @@ namespace CommunityShed.Community
                 }
 
                 DataTable itemDT = DatabaseHelper.Retrieve(@"
-                    select i.ItemName, i.Usage, i.Warning, i.Age, i.Id
+                    select i.ItemName, i.Usage, i.Warning, i.Age, i.Id,
                     p.FirstName + ' ' + p.LastName as OwnerName 
                     from CommunityItems cI
                     inner join Item i
@@ -97,7 +97,9 @@ namespace CommunityShed.Community
         {
             var button = (Button)sender;
             int itemId = int.Parse(button.CommandArgument);
+
             DateTimeOffset requesteddate = DateTime.Now;
+
             string email = User.Identity.Name;
 
             DataTable person = DatabaseHelper.Retrieve(@"
@@ -108,7 +110,7 @@ namespace CommunityShed.Community
 
             DataTable community = DatabaseHelper.Retrieve(@"
                     select Id
-                    from CommunityId
+                    from CommunityItems
                     where ItemId = @ItemId
                 ", new SqlParameter("@ItemId", itemId));
 
@@ -116,12 +118,15 @@ namespace CommunityShed.Community
             int communityitemId = community.Rows[0].Field<int>("Id");
 
             DatabaseHelper.Insert(@"
-                insert into ItemApplication (CommunityItemId, BorrowerId, DateRequested)
-                values (@CommunityItemId, @BorrowerId, @DateRequested);
+                insert into itemapplication (communityitemid, borrowerid, daterequested)
+                values (@communityitemid, @borrowerid, @daterequested);
             ",
-                new SqlParameter("@CommunityItemId", communityitemId),
-                new SqlParameter("@BorrowerId", borrowerId),
-                new SqlParameter("@DateRequested", requesteddate));
+                new SqlParameter("@communityitemid", communityitemId),
+                new SqlParameter("@borrowerid", borrowerId),
+                new SqlParameter("@daterequested", requesteddate));
+
+            button.Text = "Requested";
+            button.Enabled = false;
         }
     }
 }
