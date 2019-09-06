@@ -73,8 +73,13 @@
     <Content Include="Community\CommunityAdd.aspx" />
     <Content Include="Community\CommunityDetails.aspx" />
     <Content Include="Community\CommunityJoin.aspx" />
+    <Content Include="Community\CommunityMembers.aspx" />
     <Content Include="Community\Join.aspx" />
+<<<<<<< HEAD
+    <Content Include="Community\MemberEdit.aspx" />
+=======
     <Content Include="Item\ItemAdd.aspx" />
+>>>>>>> staging
     <Content Include="Item\ItemEdit.aspx" />
     <Content Include="packages.config" />
     <Content Include="CommunityShed.Master" />
@@ -123,12 +128,26 @@
     <Compile Include="Community\CommunityJoin.aspx.designer.cs">
       <DependentUpon>CommunityJoin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Community\CommunityMembers.aspx.cs">
+      <DependentUpon>CommunityMembers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Community\CommunityMembers.aspx.designer.cs">
+      <DependentUpon>CommunityMembers.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Community\Join.aspx.cs">
       <DependentUpon>Join.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Community\Join.aspx.designer.cs">
       <DependentUpon>Join.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Community\MemberEdit.aspx.cs">
+      <DependentUpon>MemberEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Community\MemberEdit.aspx.designer.cs">
+      <DependentUpon>MemberEdit.aspx</DependentUpon>
     </Compile>
     <Compile Include="Data\BasePage.cs">
       <SubType>ASPXCodeBehind</SubType>
