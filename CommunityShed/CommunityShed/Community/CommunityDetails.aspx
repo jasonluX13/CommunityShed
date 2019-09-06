@@ -61,6 +61,7 @@
 
                         <td><asp:hyperlink Text="Edit" CssClass="btn btn-dark" NavigateUrl='<%# $"~/Item/ItemEdit.aspx?ID={Item.Field<int>("Id")}&CID={Item.Field<int>("CommunityId")}" %>' runat="server" /></td>
                         <td><asp:Button ID="Borrow" Text="Request to Borrow" CommandArgument='<%#Item.Field<int>("Id") %>' OnClick="Borrow_Click" runat="server" /></td>
+                        <td><asp:Button ID="Cancel" Text="Cancel Request" CommandArgument='<%#Item.Field<int>("Id") %>' onclick="Cancel_Click" runat="server" /></td>
                         <td></td>
                     </tr>
                 </ItemTemplate>
