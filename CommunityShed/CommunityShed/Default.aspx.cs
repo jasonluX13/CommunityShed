@@ -37,20 +37,36 @@ namespace CommunityShed
                 Communities.DataSource = communityList.Rows;
                 Communities.DataBind();
 
-                if(communityList.Rows.Count == 1)
-                {
-                    int loggedinId = person.Rows[0].Field<int>("Id");
+               
+                int loggedinId = person.Rows[0].Field<int>("Id");
 
-                    DataTable itemspostedDt = DatabaseHelper.Retrieve(@"
-                        select ItemName, Usage, Warning, Age
-                        from Item
-                        where OwnerId = @Id
-                    ", new SqlParameter("@Id", loggedinId));
+                DataTable itemspostedDt = DatabaseHelper.Retrieve(@"
+                    select ItemName, Usage, Warning, Age
+                    from Item
+                    where OwnerId = @Id
+                ", new SqlParameter("@Id", loggedinId));
 
-                    ItemsPosted.DataSource = itemspostedDt.Rows;
-                    ItemsPosted.DataBind();
-                }
-     
+                ItemsPosted.DataSource = itemspostedDt.Rows;
+                ItemsPosted.DataBind();
+
+                DataTable requests = DatabaseHelper.Retrieve(@"
+                    select i.ItemName, cI.Id, c.CommunityName,
+                    p.FirstName + ' ' + LastName as BorrowerName,
+                    iA.DateRequested
+                    from ItemApplication iA
+                        join Person p
+                        on p.Id = iA.BorrowerId
+                        join CommunityItems cI
+                        on cI.Id = iA.CommunityItemId
+                        join Item i
+                        on i.Id = cI.ItemId
+                        join Community c
+                        on c.Id = cI.CommunityId
+                    where i.OwnerId = @Id
+                ", new SqlParameter("@Id", loggedinId));
+
+                Requests.DataSource = requests.Rows;
+                Requests.DataBind();
             }
         }
     }
