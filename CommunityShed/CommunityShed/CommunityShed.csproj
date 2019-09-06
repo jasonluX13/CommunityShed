@@ -75,11 +75,8 @@
     <Content Include="Community\CommunityJoin.aspx" />
     <Content Include="Community\CommunityMembers.aspx" />
     <Content Include="Community\Join.aspx" />
-<<<<<<< HEAD
     <Content Include="Community\MemberEdit.aspx" />
-=======
     <Content Include="Item\ItemAdd.aspx" />
->>>>>>> staging
     <Content Include="Item\ItemEdit.aspx" />
     <Content Include="packages.config" />
     <Content Include="CommunityShed.Master" />
