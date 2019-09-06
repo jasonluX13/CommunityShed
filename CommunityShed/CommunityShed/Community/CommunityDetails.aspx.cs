@@ -72,5 +72,30 @@ namespace CommunityShed.Community
                 Items.DataBind();
             }
         }
+
+        protected void Search_Click(object sender, EventArgs e)
+        {
+            string search = SearchText.Text;
+            DataTable dt = DatabaseHelper.Retrieve(@"
+                select i.ItemName, i.Usage, i.Warning, i.Age,
+                p.FirstName + ' ' + p.LastName as OwnerName 
+                from CommunityItems cI
+                inner join Item i
+                    on i.Id = cI.ItemId
+                inner join Person p
+                    on i.OwnerId = p.Id
+                where ItemName Like '%' + @Search + '%' and cI.CommunityId = @Id
+            ", 
+                new SqlParameter("@Search", search),
+                new SqlParameter("Id", communityId));
+
+            Items.DataSource = dt.Rows;
+            Items.DataBind();
+        }
+
+        protected void Borrow_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

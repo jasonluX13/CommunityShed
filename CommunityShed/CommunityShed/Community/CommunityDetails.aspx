@@ -29,6 +29,11 @@
         </>--%>
 
         <h2 class="text-center display-2">Community Items</h2>
+        <div class="col-3">
+            <asp:textbox id="SearchText" runat="server" CssClass="form-control mr-sm-2" placeholder="Search Items" aria-label="Search" />
+            <asp:button id="Search" runat="server" cssclass="btn btn-outline-success my-2 my-sm-0" text="Search" onclick="Search_Click"></asp:button>
+        </div>
+
         <div>
             <asp:Repeater ID="Items" runat="server" ItemType="DataRow">
                 <HeaderTemplate>
@@ -41,6 +46,7 @@
                                 <th>Warning</th>
                                 <th>Age</th>
                                 <th>&nbsp;</th>
+                                <th>&nbsp;</th>
                             </tr>
                         </thead>
                 </HeaderTemplate>
@@ -51,6 +57,7 @@
                         <td><%# Item.Field<string>("Usage") %></td>
                         <td><%# Item.Field<string>("Warning") %></td>
                         <td><%# Item.Field<string>("Age") %></td>
+                        <td><asp:Button ID="Borrow" Text="Request to Borrow" OnClick="Borrow_Click" runat="server" /></td>
                         <td></td>
                     </tr>
                 </ItemTemplate>
