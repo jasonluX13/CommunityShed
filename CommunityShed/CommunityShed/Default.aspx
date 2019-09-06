@@ -36,4 +36,33 @@
         <asp:hyperlink runat="server" class="btn btn-lg btn-info" navigateurl="~/Community/CommunityJoin.aspx">Join a New Community</asp:hyperlink>
     </div>
 
+    <h2 class="display-3 text-center">Posted Items</h2>
+        <div>
+            <asp:Repeater ID="ItemsPosted" runat="server" ItemType="DataRow">
+                <HeaderTemplate>
+                    <table class="table table-striped tabled-bordered table-hover">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Item Name</th>
+                                <th>Usage</th>
+                                <th>Warning</th>
+                                <th>Age</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                </HeaderTemplate>
+                <ItemTemplate>
+                    <tr>
+                        <td><%# Item.Field<string>("ItemName") %></td>
+                        <td><%# Item.Field<string>("Usage") %></td>
+                        <td><%# Item.Field<string>("Warning") %></td>
+                        <td><%# Item.Field<string>("Age") %></td>
+                        <td></td>
+                    </tr>
+                </ItemTemplate>
+                <FooterTemplate>
+                    </table>
+                </FooterTemplate>
+            </asp:Repeater>
+    </div>
 </asp:Content>

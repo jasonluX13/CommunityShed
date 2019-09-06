@@ -17,8 +17,15 @@ namespace CommunityShed
             if(!IsPostBack)
             {
                 string email = User.Identity.Name;
-                DataTable dt = DatabaseHelper.Retrieve(@"
-                    select pC.CommunityId, c.CommunityName, pC.Id
+                
+                DataTable person = DatabaseHelper.Retrieve(@"
+                    select Person.Id
+                    from Person
+                    where Email = @Email
+                ", new SqlParameter("@Email", email));
+
+                DataTable communityList = DatabaseHelper.Retrieve(@"
+                    select pC.CommunityId, c.CommunityName, pC.Id, Person.Id
                     from PersonCommunity pC
                         join Community c
                         on c.Id = pC.CommunityId
@@ -27,9 +34,23 @@ namespace CommunityShed
                         where Person.Email = @Email
                 ", new SqlParameter("@Email", email));
 
-                Communities.DataSource = dt.Rows;
+                Communities.DataSource = communityList.Rows;
                 Communities.DataBind();
 
+                if(communityList.Rows.Count == 1)
+                {
+                    int loggedinId = person.Rows[0].Field<int>("Id");
+
+                    DataTable itemspostedDt = DatabaseHelper.Retrieve(@"
+                        select ItemName, Usage, Warning, Age
+                        from Item
+                        where OwnerId = @Id
+                    ", new SqlParameter("@Id", loggedinId));
+
+                    ItemsPosted.DataSource = itemspostedDt.Rows;
+                    ItemsPosted.DataBind();
+                }
+     
             }
         }
     }
