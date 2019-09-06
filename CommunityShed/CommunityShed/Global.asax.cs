@@ -35,6 +35,7 @@ namespace CommunityShed
                 DataTable dt = DatabaseHelper.Retrieve(@"
                    Select RoleName, Community.Id From Person join PersonRole on Person.Id = PersonRole.PersonId
                    join Community on Community.Id = PersonRole.CommunityId
+                   join Role on PersonRole.RoleId = Role.Id
                    where Person.Email = @Email     
                  ", new SqlParameter("@Email", email));
 
