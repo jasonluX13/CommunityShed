@@ -39,7 +39,7 @@ namespace CommunityShed
                    where Person.Email = @Email     
                  ", new SqlParameter("@Email", email));
 
-                //Each user can only have one role
+  
                 Role[] roles = new Role[30];
                 int count = 0;
 

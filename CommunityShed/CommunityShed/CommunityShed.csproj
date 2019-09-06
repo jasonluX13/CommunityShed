@@ -88,6 +88,7 @@
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Login.aspx" />
+    <Content Include="RequestDenied.aspx" />
     <Content Include="Roles\MyRoles.aspx" />
     <Content Include="SignUp.aspx" />
     <Content Include="Web.config" />
@@ -161,6 +162,13 @@
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestDenied.aspx.cs">
+      <DependentUpon>RequestDenied.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RequestDenied.aspx.designer.cs">
+      <DependentUpon>RequestDenied.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Roles\MyRoles.aspx.cs">
       <DependentUpon>MyRoles.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

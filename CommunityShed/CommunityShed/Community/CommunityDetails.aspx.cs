@@ -58,7 +58,7 @@ namespace CommunityShed.Community
                 }
 
                 DataTable itemDT = DatabaseHelper.Retrieve(@"
-                    select i.Id,i.ItemName, i.Usage, i.Warning, i.Age,
+                    select i.Id,i.ItemName, i.Usage, i.Warning, i.Age, cI.CommunityId,
                     p.FirstName + ' ' + p.LastName as OwnerName 
                     from CommunityItems cI
                     inner join Item i

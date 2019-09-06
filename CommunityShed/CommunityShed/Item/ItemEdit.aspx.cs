@@ -10,16 +10,33 @@ using System.Web.UI.WebControls;
 
 namespace CommunityShed.Item
 {
-    public partial class ItemEdit : System.Web.UI.Page
+    public partial class ItemEdit : BasePage
     {
         int ItemId;
+        int CommunityId;
         string redirect = "~/Default.aspx";
+
+        protected void Page_Init(object sender, EventArgs e)
+        {
+            if (!int.TryParse(Request.QueryString["CID"], out CommunityId))
+            {
+                Response.Redirect(redirect);
+            }
+
+            if (!CustomUser.IsInRole("Reviewer", CommunityId) && !isOwner())
+            {
+                Response.Redirect("~/RequestDenied.aspx");
+            }
+        }
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!int.TryParse(Request.QueryString["ID"], out ItemId))
             {
                 Response.Redirect(redirect);
             }
+
 
             if (!IsPostBack)
             {
@@ -70,6 +87,19 @@ namespace CommunityShed.Item
         protected void Cancel_Click(object sender, EventArgs e)
         {
             Response.Redirect(redirect);
+        }
+
+        protected bool isOwner()
+        {
+            string email = User.Identity.Name;
+            DataTable dt = DatabaseHelper.Retrieve(@"
+                Select Item.Id from Item join Person on Item.OwnerId = Person.Id
+                where Item.Id  = @ItemId and Email = @Email
+            ",
+            new SqlParameter("@Email", email),
+            new SqlParameter("@ItemId",ItemId));
+
+            return dt.Rows.Count == 1;
         }
     }
 }
