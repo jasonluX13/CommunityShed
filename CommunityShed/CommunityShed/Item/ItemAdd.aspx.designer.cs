@@ -7,72 +7,54 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CommunityShed.Community {
+namespace CommunityShed.Item {
     
     
-    public partial class CommunityDetails {
+    public partial class ItemAdd {
         
         /// <summary>
-        /// CommunityLabel control.
+        /// ItemName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label CommunityLabel;
+        protected global::System.Web.UI.WebControls.TextBox ItemName;
         
         /// <summary>
-        /// OwnerLabel control.
+        /// Usage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label OwnerLabel;
+        protected global::System.Web.UI.WebControls.TextBox Usage;
         
         /// <summary>
-        /// OpenLabel control.
+        /// Warning control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label OpenLabel;
+        protected global::System.Web.UI.WebControls.TextBox Warning;
         
         /// <summary>
-        /// SearchText control.
+        /// Age control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox SearchText;
+        protected global::System.Web.UI.WebControls.TextBox Age;
         
         /// <summary>
-        /// Search control.
+        /// Submit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Search;
-        
-        /// <summary>
-        /// Items control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater Items;
-        
-        /// <summary>
-        /// AddItem control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink AddItem;
+        protected global::System.Web.UI.WebControls.Button Submit;
     }
 }
