@@ -28,7 +28,7 @@
             <asp:Label ID="OpenLabel" Text="Privacy: " runat="server" />
         </>--%>
 
-        <h2 class="text-center display-2">Community Items</h2>
+        <h3 class="text-center display-4">Community Items</h3>
         <div class="col-3">
             <asp:textbox id="SearchText" runat="server" CssClass="form-control mr-sm-2" placeholder="Search Items" aria-label="Search" />
             <asp:button id="Search" runat="server" cssclass="btn btn-outline-success my-2 my-sm-0" text="Search" onclick="Search_Click"></asp:button>
@@ -60,10 +60,7 @@
                         <td><%# Item.Field<string>("Age") %></td>
 
                         <td><asp:hyperlink Text="Edit" CssClass="btn btn-dark" NavigateUrl='<%# $"~/Item/ItemEdit.aspx?ID={Item.Field<int>("Id")}&CID={Item.Field<int>("CommunityId")}" %>' runat="server" /></td>
-
                         <td><asp:Button ID="Borrow" Text="Request to Borrow" CommandArgument='<%#Item.Field<int>("Id") %>' OnClick="Borrow_Click" runat="server" /></td>
-
-                   
                         <td></td>
                     </tr>
                 </ItemTemplate>
@@ -72,7 +69,11 @@
                 </FooterTemplate>
             </asp:Repeater>
         </div>
-
+        <asp:hyperlink id="AddItem" runat="server" Text="Add Item"/>
     </fieldset>
+    
+
+         
+
     
 </asp:Content>
