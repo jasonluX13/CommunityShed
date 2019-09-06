@@ -19,7 +19,7 @@
             <ItemTemplate>
                 <tr>
                     <td><%# Item.Field<string>("CommunityName") %></td>
-                    <td><asp:hyperlink runat="server" class="btn btn-sl btn-outline-info" navigateurl='<%# $"~/Community/CommunityDetails.aspx?ID={Item.Field<int>("Id")}" %>' text="Details" /></td>
+                    <td><asp:hyperlink runat="server" class="btn btn-sl btn-outline-info" navigateurl='<%# $"~/Community/CommunityDetails.aspx?ID={Item.Field<int>("CommunityId")}" %>' text="Details" /></td>
                 </tr>
             </ItemTemplate>
             <FooterTemplate>
