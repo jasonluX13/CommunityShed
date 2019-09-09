@@ -1,0 +1,187 @@
+﻿using CommunityShed.Data;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace CommunityShed.Community
+{
+    public partial class CommunityDetails : System.Web.UI.Page
+    {
+        public int communityId = 0;
+        int communityitemId = 0;
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!int.TryParse(Request.QueryString["Id"], out communityId))
+            {
+                Response.Redirect("~/Default.aspx");
+            }
+
+            if (!IsPostBack)
+            {
+                DataTable communityDt = DatabaseHelper.Retrieve(@"
+                    select CommunityName, [Open], OwnerId
+                    from Community
+                    where Id = @Id  
+                ", new SqlParameter("@Id", communityId));
+
+
+                if (communityDt.Rows.Count == 1)
+                {
+                    CommunityLabel.Text = communityDt.Rows[0].Field<string>("CommunityName");
+                    int ownerId = communityDt.Rows[0].Field<int>("OwnerId");
+                    bool privacy = communityDt.Rows[0].Field<bool>("Open");
+
+                    DataTable OwnerDt = DatabaseHelper.Retrieve(@"
+                        select FirstName + ' ' + LastName as OwnerName
+                        from Person
+                        where Id = @Id  
+                    ", new SqlParameter("@Id", ownerId));
+
+                    OwnerLabel.Text = OwnerDt.Rows[0].Field<string>("OwnerName");
+
+                    if (privacy)
+                    {
+                        OpenLabel.Text = "Open";
+                    } else
+                    {
+                        OpenLabel.Text = "Closed";
+                    }
+                }
+                else
+                {
+                    Response.Redirect("~/Default.aspx");
+                }
+
+                DataTable itemDT = DatabaseHelper.Retrieve(@"
+                    select i.Id,i.ItemName, i.Usage, i.Warning, i.Age, cI.CommunityId,
+                    p.FirstName + ' ' + p.LastName as OwnerName 
+                    from CommunityItems cI
+                    inner join Item i
+                        on i.Id = cI.ItemId
+                    inner join Person p
+                        on i.OwnerId = p.Id
+                    where cI.CommunityId = @Id
+                ", new SqlParameter("@Id", communityId));
+
+                Items.DataSource = itemDT.Rows;
+                Items.DataBind();
+
+                AddItem.NavigateUrl = $"~/Item/ItemAdd.aspx?ID={communityId}";
+            }
+        }
+
+        protected void Search_Click(object sender, EventArgs e)
+        {
+            string search = SearchText.Text;
+            DataTable dt = DatabaseHelper.Retrieve(@"
+                select i.Id,i.ItemName, i.Usage, i.Warning, i.Age, cI.CommunityId,
+                p.FirstName + ' ' + p.LastName as OwnerName 
+                from CommunityItems cI
+                inner join Item i
+                    on i.Id = cI.ItemId
+                inner join Person p
+                    on i.OwnerId = p.Id
+                where ItemName Like '%' + @Search + '%' or Usage Like '%' + @Search + '%' or 
+                Age Like '%' + @Search + '%'  and cI.CommunityId = @Id
+            ", 
+                new SqlParameter("@Search", search),
+                new SqlParameter("Id", communityId));
+
+            Items.DataSource = dt.Rows;
+            Items.DataBind();
+        }
+
+        protected void Borrow_Click(object sender, EventArgs e)
+        {
+          
+            var button = (Button)sender;
+            int itemId = int.Parse(button.CommandArgument);
+
+            DateTimeOffset requesteddate = DateTime.Now;
+
+            string email = User.Identity.Name;
+
+            DataTable person = DatabaseHelper.Retrieve(@"
+                    select Id
+                    from Person
+                    where Email = @Email
+                ", new SqlParameter("@Email", email));
+
+            DataTable community = DatabaseHelper.Retrieve(@"
+                    select cI.Id, i.OwnerId
+                    from CommunityItems cI
+                        join Item i
+                        on i.Id = cI.ItemId
+                    where cI.ItemId = @ItemId
+                ", new SqlParameter("@ItemId", itemId));
+
+            int borrowerId = person.Rows[0].Field<int>("Id");
+            communityitemId = community.Rows[0].Field<int>("Id");
+            int ownerId = community.Rows[0].Field<int>("OwnerId");
+
+            
+                DatabaseHelper.Insert(@"
+                    insert into itemapplication (communityitemid, borrowerid, daterequested)
+                    values (@communityitemid, @borrowerid, @daterequested);
+                ",
+                new SqlParameter("@communityitemid", communityitemId),
+                new SqlParameter("@borrowerid", borrowerId),
+                new SqlParameter("@daterequested", requesteddate));
+
+                button.Text = "Requested";
+                button.Enabled = false;
+            
+
+            
+        }
+
+        protected void Cancel_Click(object sender, EventArgs e)
+        {
+            var button = (Button)sender;
+            int itemId = int.Parse(button.CommandArgument);
+            string email = User.Identity.Name;
+
+            DataTable person = DatabaseHelper.Retrieve(@"
+                    select Id
+                    from Person
+                    where Email = @Email
+                ", new SqlParameter("@Email", email));
+
+            DataTable community = DatabaseHelper.Retrieve(@"
+                    select Id
+                    from CommunityItems
+                    where CommunityId = @CommunityId and ItemId = @ItemId
+                ", new SqlParameter("@CommunityId", communityId),
+                   new SqlParameter("@ItemId",itemId));
+
+            int loggedinId = person.Rows[0].Field<int>("Id");
+            communityitemId = community.Rows[0].Field<int>("Id");
+
+            DataTable requests = DatabaseHelper.Retrieve(@"
+                    select Id
+                    from ItemApplication
+                    where CommunityItemId = @CommunityItemId and BorrowerId = @BorrowerId
+                ", new SqlParameter("@CommunityItemId", communityitemId),
+                   new SqlParameter("@BorrowerId", loggedinId));
+
+            if (requests.Rows.Count == 1)
+            {
+                int applicationId = requests.Rows[0].Field<int>("Id");
+
+                DatabaseHelper.Update(@"
+                    delete from ItemApplication
+                    where Id = @Id
+                ",
+                    new SqlParameter("@Id", applicationId));
+            }
+            
+
+        }
+    }
+}
